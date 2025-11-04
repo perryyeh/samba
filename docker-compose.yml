@@ -1,13 +1,18 @@
+version: "3.8"
+
 services:
   samba:
     image: dockurr/samba
     container_name: samba
-    environment:
-      NAME: "Data"
-      USER: "nvrusername"
-      PASS: "nvrpassword"
-    ports:
-      - 445:445
-    volumes:
-      - ./nvrpath:/storage
     restart: always
+
+    environment:
+      NAME: "${SMB_NAME:-Data}"
+      USER: "${SMB_USER}"
+      PASS: "${SMB_PASS}"
+
+    ports:
+      - "${SMB_PORT:-445}:445"
+
+    volumes:
+      - "${SMB_STORAGE}:/storage"
