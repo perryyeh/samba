@@ -6,7 +6,7 @@ services:
     restart: always
 
     environment:
-      NAME: "${SMB_NAME:-Data}"
+      NAME: "${SMB_NAME}"
       USER: "${SMB_USER}"
       PASS: "${SMB_PASS}"
 
