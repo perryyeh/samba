@@ -4,6 +4,7 @@ services:
   samba:
     image: dockurr/samba
     container_name: samba
+    hostname: samba
     restart: always
 
     environment:
@@ -11,8 +12,28 @@ services:
       USER: "${SMB_USER}"
       PASS: "${SMB_PASS}"
 
-    ports:
-      - "${SMB_PORT:-445}:445"
+    # 走 macvlan，指定 IPv4 / IPv6
+    networks:
+      macvlan:
+        ipv4_address: ${samba4}
+        ipv6_address: ${samba6}
 
+    # 固定 MAC 地址
+    mac_address: ${sambamac}
+
+    # 开启容器内 IPv6
+    sysctls:
+      net.ipv6.conf.all.disable_ipv6: "0"
+      net.ipv6.conf.default.disable_ipv6: "0"
+
+    # 使用宿主路径挂载共享目录
     volumes:
       - "${SMB_STORAGE}:/storage"
+
+    # 如果你仍然想通过宿主机端口访问，可以保留：
+    # ports:
+    #   - "${SMB_PORT:-445}:445"
+
+networks:
+  macvlan:
+    external: true
