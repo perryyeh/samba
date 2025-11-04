@@ -4,8 +4,8 @@ services:
     container_name: samba
     environment:
       NAME: "Data"
-      USER: "nvr"
-      PASS: "nvrpasswd"
+      USER: "nvrusername"
+      PASS: "nvrpassword"
     ports:
       - 445:445
     volumes:
