@@ -1,0 +1,13 @@
+services:
+  samba:
+    image: dockurr/samba
+    container_name: samba
+    environment:
+      NAME: "Data"
+      USER: "nvr"
+      PASS: "nvrpasswd"
+    ports:
+      - 445:445
+    volumes:
+      - ./nvrpath:/storage
+    restart: always
