@@ -31,7 +31,7 @@ services:
     # 如果你仍然想通过宿主机端口访问，可以保留：
     # ports:
     #   - "${SMB_PORT:-445}:445"
-
 networks:
   macvlan:
     external: true
+    name: "${MACVLAN_NET:-macvlan}"
