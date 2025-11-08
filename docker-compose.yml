@@ -27,6 +27,8 @@ services:
     # 使用宿主路径挂载共享目录
     volumes:
       - "${SMB_STORAGE}:/storage"
+      - "${appdir}/smb.conf:/etc/samba/smb.conf"
+    #  - "${appdir}/users.conf:/etc/samba/users.conf"
 
     # 如果你仍然想通过宿主机端口访问，可以保留：
     # ports:
